@@ -1,23 +1,20 @@
-import logo from './logo.svg';
-import './App.css';
+import AddTaskInput from "./components/AddTaskInput";
+import TodoList from "./components/TodoList";
+import { Space } from "antd";
+import { useSelector } from "react-redux";
 
-function App() {
+
+const App = () => {
+  const tasks = useSelector(state=>state.todoReducer.todos)
+  const uncompleted = tasks.filter(i=>!i.isDone).length
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="app">
+      <h1>Todo List React/Redux</h1>
+      <Space direction="vertical" className="container">
+        <h2>Tasks to do: {uncompleted}</h2>
+        <AddTaskInput />
+        <TodoList />
+      </Space>
     </div>
   );
 }
